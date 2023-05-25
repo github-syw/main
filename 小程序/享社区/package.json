@@ -1,0 +1,17 @@
+{
+  "name": "zsyw",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "zsyw",
+  "repository": "",
+  "license": "",
+  "devDependencies": {
+    "eslint": "^8.23.0"
+  },
+  "dependencies": {
+    "@vant/weapp": "^1.10.4",
+    "wechat-http": "^0.0.5",
+    "wechat-validate": "^0.0.3"
+  }
+}
