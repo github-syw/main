@@ -30,8 +30,6 @@ module.exports = {
       {
         ignores: ['index']
       }
-    ],
-    // defineProps可以解构
-    'vue/no-setup-props-destructure': ['off']
+    ]
   }
 }
