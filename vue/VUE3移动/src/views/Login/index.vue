@@ -51,9 +51,10 @@
         </van-checkbox>
       </div>
       <div class="cp-cell">
-        <van-button block round type="primary" native-type="submit"
-          >登 录</van-button
-        >
+        <!-- submit触发表单提交 -->
+        <van-button block round type="primary" native-type="submit">
+          登 录
+        </van-button>
       </div>
       <div class="cp-cell">
         <a href="javascript:;">忘记密码？</a>
@@ -75,12 +76,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { showToast } from 'vant'
 import { useUserStore } from '@/stores'
+import { showSuccessToast, showToast } from 'vant'
 import { mobileRules, passwordRules, codeRules } from '@/utils/rules'
 import { loginByPasswordAPI, loginByMobileAPI } from '@/services/user'
 import { useRoute, useRouter } from 'vue-router'
 import { useMobileCode } from '@/composable'
+
 const store = useUserStore()
 const router = useRouter()
 const route = useRoute()
@@ -93,25 +95,21 @@ const url =
 const show = ref(false)
 // 短信/密码登录
 const isPass = ref(true)
-// 绑定表单
+
+// 表单
 const mobile = ref('13230000100')
 const password = ref('abc12345')
 const agree = ref(false)
 const code = ref('')
-// 表单校验通过后触发submit事件
 const login = async () => {
-  if (!agree.value) return showToast('请阅读用户协议，并勾选')
-  // 进行登录
+  if (!agree.value) return showToast('请阅读用户协议，并勾选！')
   try {
     const res = isPass.value
       ? await loginByPasswordAPI(mobile.value, password.value)
       : await loginByMobileAPI(mobile.value, code.value)
-    // 登录成功，存储用户信息
-    store.setUser(res.data)
-    // 登录成功，回调页面，没有回调页面就到首页，replace没有历史记录
+    store.setUser(res.data) // 登录成功，存储用户信息
     router.replace((route.query.returnUrl as string) || '/home')
-    // 登录成功提示
-    showToast('登录成功')
+    showSuccessToast('登录成功')
   } catch (error) {
     //
   }

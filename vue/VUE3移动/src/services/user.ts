@@ -1,7 +1,11 @@
 import { request } from '@/utils/request'
 import type { CodeType, Patient, User, UserInfo } from '@/types/user'
 
-// 登录--密码登录
+/**
+ * 登录--密码登录
+ * @param mobile 手机号
+ * @param password 密码
+ */
 export const loginByPasswordAPI = (mobile: string, password: string) =>
   request<User>('login/password', 'POST', { mobile, password })
 
