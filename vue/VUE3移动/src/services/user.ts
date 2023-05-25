@@ -9,11 +9,19 @@ import type { CodeType, Patient, User, UserInfo } from '@/types/user'
 export const loginByPasswordAPI = (mobile: string, password: string) =>
   request<User>('login/password', 'POST', { mobile, password })
 
-// 获取手机验证码
+/**
+ * 获取手机验证码
+ * @param mobile 手机号
+ * @param type 发送验证码的类型 "login" | "register" | "changeMobile" | "forgetPassword" | "bindMobile"
+ */
 export const sendMobileCodeAPI = (mobile: string, type: CodeType) =>
   request('code', 'GET', { mobile, type })
 
-// 登录--手机验证码登录
+/**
+ * 登录--手机验证码登录
+ * @param mobile 手机号
+ * @param code 验证码
+ */
 export const loginByMobileAPI = (mobile: string, code: string) =>
   request<User>('login', 'POST', { mobile, code })
 

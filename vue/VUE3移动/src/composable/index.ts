@@ -105,33 +105,32 @@ export const useOrderDetail = (id: string) => {
 
 // 发送验证码
 export const useMobileCode = (mobile: Ref<string>, type: CodeType) => {
-  // 倒计时
-  const time = ref(0)
   // 定时器
   let timeId: number
   // 表单
   const form = ref<FormInstance>()
-  // 发送验证码按钮
+  // 倒计时时间
+  const time = ref(0)
+  // 发送验证码点击事件
   const send = async () => {
-    // 倒计时大于0，说明正在倒计时，就return
-    if (time.value > 0) return
-    await form.value?.validate('mobile')
+    if (time.value > 0) return // 倒计时大于0，说明正在倒计时，就return
     try {
-      await sendMobileCodeAPI(mobile.value, type)
-      showToast('发送成功')
-      // 发送成功开启倒计时
-      time.value = 60
-      if (timeId) clearInterval(timeId)
+      await form.value?.validate('mobile') // 校验手机号
+      await sendMobileCodeAPI(mobile.value, type) // 校验通过，发送http请求
+      showToast('发送成功') // 提示用户
+      time.value = 60 // 发送成功开启倒计时
+      if (timeId) clearInterval(timeId) // 开启定时器之前清理定时器
+      // 开启倒计时
       timeId = setInterval(() => {
         time.value--
-        if (time.value <= 0) clearInterval(timeId)
+        if (time.value <= 0) clearInterval(timeId) // 倒计时结束，清理定时器
       }, 1000)
     } catch (error) {
       //
     }
   }
   onUnmounted(() => {
-    clearInterval(timeId)
+    clearInterval(timeId) // 组件销毁时，清理定时器
   })
   return { time, form, send }
 }

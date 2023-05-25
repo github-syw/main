@@ -93,9 +93,8 @@ const url =
 
 // 小眼睛
 const show = ref(false)
-// 短信/密码登录
+// 短信/密码登录切换（默认密码登录）
 const isPass = ref(true)
-
 // 表单
 const mobile = ref('13230000100')
 const password = ref('abc12345')
