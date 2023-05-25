@@ -1,4 +1,4 @@
-import CpIcon from '@/components/CpNavBar.vue'
+import CpIcon from '@/components/CpIcon.vue'
 import CpNavBar from '@/components/CpNavBar.vue'
 import CpRadioBtn from '@/components/CpRadioBtn.vue'
 import CpConsultMore from '@/components/CpConsultMore.vue'
