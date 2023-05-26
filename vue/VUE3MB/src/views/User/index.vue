@@ -118,8 +118,7 @@ onMounted(() => {
 // 退出登录
 const logout = () => {
   showConfirmDialog({
-    title: '温馨提示',
-    message: '您确认要退出吗?',
+    message: '退出登录',
     cancelButtonText: '取消',
     confirmButtonText: '确认'
   })
