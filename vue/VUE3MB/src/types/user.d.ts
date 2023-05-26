@@ -20,22 +20,30 @@ export type CodeType =
   | 'forgetPassword'
   | 'bindMobile'
 
-// 用户信息
+/** 用户信息 */
 type OmitUser = Omit<User, 'token'>
 export type UserInfo = OmitUser & {
-  likeNumber: number // 关注
-  collectionNumber: number // 收藏
-  score: number // 积分
-  couponNumber: number // 优惠券
+  /** 关注 */
+  likeNumber: number
+  /** 收藏 */
+  collectionNumber: number
+  /** 积分 */
+  score: number
+  /** 优惠券 */
+  couponNumber: number
   orderInfo: {
-    paidNumber: number // 待付款
-    receivedNumber: number // 待发货
-    shippedNumber: number // 待收货
-    finishedNumber: number // 已完成
+    /** 待付款 */
+    paidNumber: number
+    /** 待发货 */
+    receivedNumber: number
+    /** 待收货 */
+    shippedNumber: number
+    /** 已完成 */
+    finishedNumber: number
   }
 }
 
-// 问诊-查询患者列表信息/家庭档案-患者信息
+/** 问诊-查询患者列表信息/家庭档案-患者信息 */
 export type Patient = {
   name: string // 患者名称
   idCard: string // 身份证号

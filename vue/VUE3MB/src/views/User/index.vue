@@ -2,9 +2,9 @@
   <div class="user-page" v-if="user">
     <div class="user-page-head">
       <div class="top">
-        <van-image round fit="cover" />
+        <van-image round fit="cover" :src="user.avatar" />
         <div class="name">
-          <p>{{ store.user?.account }}</p>
+          <p>{{ user.account }}</p>
           <p><van-icon name="edit" /></p>
         </div>
       </div>
@@ -62,6 +62,7 @@
       </van-row>
     </div>
 
+    <!-- 快捷工具 -->
     <div class="user-page-group">
       <van-cell
         :to="item.path"
@@ -100,7 +101,7 @@ const tools = [
   { label: '设置', path: '' }
 ]
 
-// 获取个人资料
+// API - 我的-获取个人用户信息
 const user = ref<UserInfo>()
 const userInfo = async () => {
   try {
@@ -110,7 +111,6 @@ const userInfo = async () => {
     //
   }
 }
-
 onMounted(() => {
   userInfo()
 })
@@ -127,7 +127,9 @@ const logout = () => {
       store.delUser()
       router.replace('/login')
     })
-    .catch(() => {})
+    .catch(() => {
+      //
+    })
 }
 </script>
 

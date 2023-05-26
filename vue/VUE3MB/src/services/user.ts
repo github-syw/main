@@ -25,7 +25,9 @@ export const sendMobileCodeAPI = (mobile: string, type: CodeType) =>
 export const loginByMobileAPI = (mobile: string, code: string) =>
   request<User>('login', 'POST', { mobile, code })
 
-// 我的-获取个人用户信息
+/**
+ * 我的-获取个人用户信息
+ */
 export const getUserInfoAPI = () => request<UserInfo>('patient/myUser', 'GET')
 
 // 问诊-查询患者列表信息
