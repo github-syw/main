@@ -104,18 +104,23 @@ const router = createRouter({
   ]
 })
 
+// 全局前置导航守卫
 router.beforeEach((to) => {
   NProgress.start()
   const store = useUserStore()
-  const whiteList = ['/login', '/login/callback', '/register'] // 白名单，不需要登录就可以访问的页面
-  // 若用户直接在地址栏中输入地址，去家庭档案页面，此时用户没有登录，没有token，就不让用户看到，让用户去登录页
-  // 其它情况通通放行
+  // 白名单，不需要登录就可以访问的页面
+  const whiteList = ['/login', '/login/callback', '/register']
+  // 没有token并且不在白名单，重定向到登录页
   if (!store.user?.token && whiteList.includes(to.path) === false)
     return '/login'
+  else return true // 其它情况
 })
 
+/**
+ * 全局后置导航守卫
+ * 注意：vue2里，当重定向时，后置守卫不执行
+ */
 router.afterEach((to) => {
-  // 建议修改标题放在后置守卫 ，切换路由完成后修改标题
   document.title = `${to.meta.title || ''} - ${import.meta.env.VITE_APP_TITLE}`
   NProgress.done()
 })
